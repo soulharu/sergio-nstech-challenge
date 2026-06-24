@@ -1,0 +1,22 @@
+services:
+  orders.api:
+    image: ${DOCKER_REGISTRY-}ordersapi
+    build:
+      context: .
+      dockerfile: Orders.API/Dockerfile
+    ports:
+      - "5000:5000"
+      - "5001:5001"   
+  
+
+  orders.db:
+    image: postgres:latest
+    container_name: orders.db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=ordersdb 
+    volumes:
+      - ./.containers/orders-db:/var/lib/postgresql
+    ports:
+      - "5432:5432"
