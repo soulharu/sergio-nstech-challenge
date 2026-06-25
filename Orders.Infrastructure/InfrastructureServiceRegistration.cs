@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -10,10 +11,12 @@ namespace Orders.Infrastructure;
 
 public static class InfrastructureServiceRegistration
 {
-    public static IServiceCollection AddInfrastructureServices(
-        this IServiceCollection services,
-        IConfiguration configuration)
+    public static IServiceCollection AddInfrastructureServices(this IServiceCollection services,IConfiguration configuration)
     {
+        services.AddDbContext<OrdersDbContext>(options =>
+            options.UseNpgsql(configuration.GetConnectionString("Orders.DB"),
+            o => o.MigrationsAssembly(typeof(InfrastructureServiceRegistration).Assembly.FullName)));
+
         services.AddScoped<ITokenService, JwtTokenService>();
 
         var jwtSettings = configuration.GetSection("JwtSettings");
