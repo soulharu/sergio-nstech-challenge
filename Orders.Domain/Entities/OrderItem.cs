@@ -7,5 +7,20 @@
         public Guid ProductId { get; set; }
         public decimal UnitPrice { get; set; }
         public decimal Quantity { get; set; }
+        public decimal Subtotal => UnitPrice * Quantity;
+
+        private OrderItem() { }
+
+        public OrderItem(Guid orderId, Guid productId, decimal unitPrice, int quantity)
+        {
+            if (unitPrice <= 0) throw new ArgumentException("Unit price must be greater than zero.");
+            if (quantity <= 0) throw new ArgumentException("Quantity must be greater than zero.");
+
+            Id = Guid.NewGuid();
+            OrderId = orderId;
+            ProductId = productId;
+            UnitPrice = unitPrice;
+            Quantity = quantity;
+        }
     }
 }
