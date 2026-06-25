@@ -6,6 +6,7 @@ namespace Orders.API.Controllers
     [Route("[controller]")]
     public class OrdersController : ControllerBase
     {
+        [HttpGet(Name = "get")]
         public IActionResult Index()
         {
             return Ok();

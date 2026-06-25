@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Orders.API.Contracts.Authentication;
+using Orders.Domain.Interfaces.Services;
 
 namespace Orders.API.Controllers
 {
@@ -6,9 +8,20 @@ namespace Orders.API.Controllers
     [Route("[controller]")]
     public class AuthController : ControllerBase
     {
-        public IActionResult Index()
+        private readonly IAuthService _authenticationService;
+
+        public AuthController(IAuthService authenticationService) => _authenticationService = authenticationService;
+
+
+        [HttpPost(Name = "token")]
+        public IActionResult GetToken([FromBody] TokenRequest request)
         {
-            return Ok();
+            var token = _authenticationService.GetAuthenticationToken(request.Username, request.Password);
+
+            if (token is null)
+                return Unauthorized(new { message = "Invalid credentials." });
+
+            return Ok(new TokenResponse(token, DateTime.UtcNow.AddHours(1)));
         }
     }
 }
