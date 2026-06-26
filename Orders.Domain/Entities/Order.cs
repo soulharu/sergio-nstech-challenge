@@ -9,7 +9,6 @@ namespace Orders.Domain.Entities
         public Guid CustomerId { get; set; }
         public OrderStatus Status { get; set; }
         public string Currency { get; set; }
-        public decimal UnitPrice { get; set; }
         public decimal Total { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }

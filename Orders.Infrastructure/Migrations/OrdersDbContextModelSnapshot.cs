@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using Orders.Infrastructure;
+using Orders.Infrastructure.Persistence;
 
 #nullable disable
 
@@ -53,9 +53,6 @@ namespace Orders.Infrastructure.Migrations
                         .HasColumnType("numeric(18,2)")
                         .HasColumnName("total");
 
-                    b.Property<decimal>("UnitPrice")
-                        .HasColumnType("numeric");
-
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
@@ -87,8 +84,8 @@ namespace Orders.Infrastructure.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("product_id");
 
-                    b.Property<decimal>("Quantity")
-                        .HasColumnType("numeric")
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer")
                         .HasColumnName("quantity");
 
                     b.Property<decimal>("UnitPrice")

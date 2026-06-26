@@ -4,7 +4,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Orders.Application.Interfaces;
+using Orders.Domain.Interfaces.Repositories;
 using Orders.Infrastructure.Auth;
+using Orders.Infrastructure.Persistence;
+using Orders.Infrastructure.Repositories;
 using System.Text;
 
 namespace Orders.Infrastructure;
@@ -17,6 +20,9 @@ public static class InfrastructureServiceRegistration
             options.UseNpgsql(configuration.GetConnectionString("Orders.DB"),
             o => o.MigrationsAssembly(typeof(InfrastructureServiceRegistration).Assembly.FullName)));
 
+        services.AddScoped<IOrderRepository, OrderRepository>();
+        services.AddScoped<IProductRepository, ProductRepository>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<ITokenService, JwtTokenService>();
 
         var jwtSettings = configuration.GetSection("JwtSettings");

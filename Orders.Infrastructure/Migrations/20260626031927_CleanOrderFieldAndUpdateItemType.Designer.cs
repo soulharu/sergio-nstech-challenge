@@ -12,8 +12,8 @@ using Orders.Infrastructure.Persistence;
 namespace Orders.Infrastructure.Migrations
 {
     [DbContext(typeof(OrdersDbContext))]
-    [Migration("20260625180954_AddOrderAndOrderItemTables")]
-    partial class AddOrderAndOrderItemTables
+    [Migration("20260626031927_CleanOrderFieldAndUpdateItemType")]
+    partial class CleanOrderFieldAndUpdateItemType
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -56,9 +56,6 @@ namespace Orders.Infrastructure.Migrations
                         .HasColumnType("numeric(18,2)")
                         .HasColumnName("total");
 
-                    b.Property<decimal>("UnitPrice")
-                        .HasColumnType("numeric");
-
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
@@ -90,8 +87,8 @@ namespace Orders.Infrastructure.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("product_id");
 
-                    b.Property<decimal>("Quantity")
-                        .HasColumnType("numeric")
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer")
                         .HasColumnName("quantity");
 
                     b.Property<decimal>("UnitPrice")

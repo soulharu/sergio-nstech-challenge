@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Orders.Domain.Entities;
 using Orders.Infrastructure.Persistence.Configurations;
 
-namespace Orders.Infrastructure;
+namespace Orders.Infrastructure.Persistence;
 
 public sealed class OrdersDbContext : DbContext
 {
