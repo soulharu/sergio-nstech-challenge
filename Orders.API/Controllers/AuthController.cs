@@ -13,7 +13,7 @@ namespace Orders.API.Controllers
         public AuthController(IAuthService authenticationService) => _authenticationService = authenticationService;
 
 
-        [HttpPost(Name = "token")]
+        [HttpPost("token")]
         public IActionResult GetToken([FromBody] TokenRequest request)
         {
             var token = _authenticationService.GetAuthenticationToken(request.Username, request.Password);
