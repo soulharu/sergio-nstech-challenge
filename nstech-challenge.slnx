@@ -6,5 +6,6 @@
   <Project Path="Orders.Application/Orders.Application.csproj" Id="1f0cedb7-0270-4f60-bf8c-dcfdc3722872" />
   <Project Path="Orders.Domain/Orders.Domain.csproj" Id="3ee4a0ed-3df3-40d1-924b-fb330e7fd906" />
   <Project Path="Orders.Infrastructure/Orders.Infrastructure.csproj" Id="7c92406d-9b95-45fc-9170-860326e456fd" />
+  <Project Path="Orders.IntegrationTests/Orders.IntegrationTests.csproj" Id="013aa0ab-6cd2-4c9b-948f-5a0d6a657aad" />
   <Project Path="Orders.UnitTests/Orders.UnitTests.csproj" Id="76d00f2e-3d9e-471c-870c-d5427071efea" />
 </Solution>
