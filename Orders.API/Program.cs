@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Orders.API.Extensions;
+using Orders.API.Middlewares;
 using Orders.Application;
 using Orders.Infrastructure;
+using Orders.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +11,6 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerWithJwt();
-
 
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
@@ -20,6 +21,7 @@ using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<OrdersDbContext>();
     await db.Database.MigrateAsync();
+    await DbSeed.SeedDbAsync(db);
 }
 
 
@@ -31,6 +33,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseAuthorization();
 app.UseAuthorization();
 app.MapControllers();
