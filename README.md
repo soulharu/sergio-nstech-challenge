@@ -121,5 +121,6 @@ Content-Type: application/json
 - **JWT com usuários fixos** (in-memory) para manter o foco no domínio;
 - **Migrations aplicadas automaticamente**: durante a inicialização via `MigrateAsync()`;
 - **Seed de produtos**: Adicionados 5 produtos automaticamente para facilitar testes;
+- **Role Admin nas rotas de cancelar e confirmar**: para demonstração da utilização de roles embutidas nas claims do JWT;
 
 
